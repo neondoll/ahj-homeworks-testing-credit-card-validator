@@ -12,7 +12,7 @@ export default [
   },
   {
     files: ['**/*.test.js'],
-    ignores: ['**/e2e/**'],
+    ignores: ['**/__e2e__/**'],
     ...pluginJest.configs['flat/recommended'],
   },
 ];
