@@ -7,12 +7,6 @@ export default [
   { languageOptions: { globals: { ...globals.browser, ...globals.jest, ...globals.node } } },
   pluginStylistic.configs.customize({ indent: 2, quotes: 'single', semi: true, jsx: true }),
   pluginJs.configs.recommended,
-  {
-    ignores: ['dist/*', 'coverage/*', 'webpack.*.js'],
-  },
-  {
-    files: ['**/*.test.js'],
-    ignores: ['**/__e2e__/**'],
-    ...pluginJest.configs['flat/recommended'],
-  },
+  { ignores: ['dist/*', 'coverage/*', 'webpack.*.js'] },
+  { files: ['**/*.test.js'], ignores: ['e2e/*'], ...pluginJest.configs['flat/recommended'] },
 ];
