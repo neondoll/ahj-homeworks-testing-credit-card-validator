@@ -36,11 +36,13 @@ describe('Credit Card Validator form', () => {
   });
 
   describe('CardValidatorWidget', () => {
+    // eslint-disable-next-line jest/expect-expect
     test('Opening the main page', async () => {
       await page.goto(baseUrl);
       await page.waitFor('body');
     });
 
+    // eslint-disable-next-line jest/expect-expect
     test('Must add class valid if the number is valid', async () => {
       await page.goto(baseUrl);
       await page.waitFor(CardValidatorWidget.selector);
@@ -55,6 +57,7 @@ describe('Credit Card Validator form', () => {
       await page.waitForSelector(CardValidatorWidget.inputSelector + '.valid');
     });
 
+    // eslint-disable-next-line jest/expect-expect
     test('Must add class invalid if the number is not valid', async () => {
       await page.goto(baseUrl);
       await page.waitFor(CardValidatorWidget.selector);

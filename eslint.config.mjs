@@ -8,5 +8,9 @@ export default [
   pluginStylistic.configs.customize({ indent: 2, quotes: 'single', semi: true, jsx: true }),
   pluginJs.configs.recommended,
   { ignores: ['dist/*', 'coverage/*', 'webpack.*.js'] },
-  { files: ['**/*.test.js'], ignores: ['**/__e2e__/**'], ...pluginJest.configs['flat/recommended'] },
+  {
+    files: ['**/*.test.js'],
+    // ignores: ['**/__e2e__/**'],
+    ...pluginJest.configs['flat/recommended'],
+  },
 ];
