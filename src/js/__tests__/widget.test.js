@@ -25,7 +25,11 @@ describe('module widget', () => {
     describe('[CardValidatorWidget]', () => {
       let widget;
 
-      const widgetClasses = { card: 'card-validator-widget__card', message: 'card-validator-widget__message' };
+      const widgetClasses = {
+        card: 'card-validator-widget__card',
+        input: 'card-validator-widget__input',
+        message: 'card-validator-widget__message',
+      };
 
       beforeAll(() => {
         document.body.innerHTML = '<div id="app"></div>';
@@ -46,6 +50,7 @@ describe('module widget', () => {
 
         widget.showMessage(text, type);
 
+        expect(widget._input.className).toBe(`${widgetClasses.input} ${type}`);
         expect(widget._message.className).toBe(`${widgetClasses.message} ${type}`);
         expect(widget._message.textContent).toBe(text);
       });
@@ -53,22 +58,23 @@ describe('module widget', () => {
       test('.hideMessage()', () => {
         widget.hideMessage();
 
+        expect(widget._input.className).toBe(widgetClasses.input);
         expect(widget._message.className).toBe(widgetClasses.message);
         expect(widget._message.textContent).toBe('');
       });
 
-      test('.checkPaySystem()', () => {
+      test('.checkedPaySystem()', () => {
         const checkedPaySystem = paySystems[0];
 
-        widget.checkPaySystem(checkedPaySystem.value);
+        widget.checkedPaySystem(checkedPaySystem.value);
 
         paySystems.forEach((paySystem) => {
           expect(widget._container.querySelector(`.${paySystem.value}`).className).toBe(`${widgetClasses.card} ${paySystem.value} ${paySystem.value === checkedPaySystem.value ? 'checked' : 'transparent'}`);
         });
       });
 
-      test('.cleanPaySystems()', () => {
-        widget.cleanPaySystems();
+      test('.cleanPaySystem()', () => {
+        widget.cleanPaySystem();
 
         paySystems.forEach((paySystem) => {
           expect(widget._container.querySelector(`.${paySystem.value}`).className).toBe(`${widgetClasses.card} ${paySystem.value}`);
@@ -101,38 +107,38 @@ describe('module widget', () => {
       });
 
       describe('.showPaySystem()', () => {
-        test('called cleanPaySystems() and hideMessage()', () => {
+        test('called cleanPaySystem() and hideMessage()', () => {
           widget._input.value = '2';
-          widget.cleanPaySystems = jest.fn();
+          widget.cleanPaySystem = jest.fn();
           widget.hideMessage = jest.fn();
           widget.showPaySystem();
 
-          expect(widget.cleanPaySystems).toHaveBeenCalled();
+          expect(widget.cleanPaySystem).toHaveBeenCalled();
           expect(widget.hideMessage).toHaveBeenCalled();
         });
 
-        test('called hideMessage() and checkPaySystem()', () => {
+        test('called hideMessage() and checkedPaySystem()', () => {
           widget._input.value = '22';
           widget.hideMessage = jest.fn();
-          widget.checkPaySystem = jest.fn();
+          widget.checkedPaySystem = jest.fn();
           widget.getPaySystem = jest.fn();
           widget.getPaySystem.mockReturnValue(true);
           widget.showPaySystem();
 
           expect(widget.hideMessage).toHaveBeenCalled();
-          expect(widget.checkPaySystem).toHaveBeenCalled();
+          expect(widget.checkedPaySystem).toHaveBeenCalled();
         });
 
-        test('not called hideMessage() and checkPaySystem()', () => {
+        test('not called hideMessage() and checkedPaySystem()', () => {
           widget._input.value = '22';
           widget.hideMessage = jest.fn();
-          widget.checkPaySystem = jest.fn();
+          widget.checkedPaySystem = jest.fn();
           widget.getPaySystem = jest.fn();
           widget.getPaySystem.mockReturnValue(false);
           widget.showPaySystem();
 
           expect(widget.hideMessage).not.toHaveBeenCalled();
-          expect(widget.checkPaySystem).not.toHaveBeenCalled();
+          expect(widget.checkedPaySystem).not.toHaveBeenCalled();
         });
 
         test('called showMessage()', () => {

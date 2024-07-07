@@ -8,9 +8,9 @@
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest --testPathPattern=./src/",
-    "coverage": "jest --coverage --testPathPattern=./src/",
-    "e2e": "jest --testPathPattern=./e2e/ --runInBand",
+    "test": "jest --testPathPattern=./src/js/__tests__/",
+    "coverage": "jest --coverage --testPathPattern=./src/js/__tests__/",
+    "e2e": "jest --testPathPattern=./src/js/__e2e__/ --runInBand",
     "preshow:coverage": "npm run coverage",
     "show:coverage": "live-server coverage/lcov-report",
     "prepare": "husky"

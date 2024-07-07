@@ -17,13 +17,13 @@ export class CardValidatorWidget {
 
     if (paySystem) {
       if (isValidCard(inputValue, paySystem.info) && isValidLuhn(inputValue)) {
-        this.cleanPaySystems();
+        this.cleanPaySystem();
         this.hideMessage();
         this.showMessage(`The card is valid, ${paySystem.label} payment system.`, 'valid');
-        this.checkPaySystem(paySystem.value);
+        this.checkedPaySystem(paySystem.value);
       }
       else {
-        this.cleanPaySystems();
+        this.cleanPaySystem();
         this.showMessage('The card is not valid', 'invalid');
       }
     }
@@ -32,7 +32,7 @@ export class CardValidatorWidget {
     }
   }
 
-  checkPaySystem(value) {
+  checkedPaySystem(value) {
     this._cards.forEach((card) => {
       if (card.classList.contains(value)) {
         card.classList.add('checked');
@@ -43,7 +43,7 @@ export class CardValidatorWidget {
     });
   }
 
-  cleanPaySystems() {
+  cleanPaySystem() {
     this._cards.forEach((card) => {
       card.classList.remove('checked', 'transparent');
     });
@@ -87,11 +87,13 @@ export class CardValidatorWidget {
   }
 
   hideMessage() {
+    this._input.className = 'card-validator-widget__input';
     this._message.className = 'card-validator-widget__message';
     this._message.textContent = '';
   }
 
   showMessage(text, type) {
+    this._input.classList.add(type);
     this._message.classList.add(type);
     this._message.textContent = text;
   }
@@ -101,7 +103,7 @@ export class CardValidatorWidget {
     const inputValueLength = inputValue.length;
 
     if (inputValueLength < 2) {
-      this.cleanPaySystems();
+      this.cleanPaySystem();
       this.hideMessage();
     }
     else if (inputValueLength === 2) {
@@ -109,7 +111,7 @@ export class CardValidatorWidget {
 
       if (paySystem) {
         this.hideMessage();
-        this.checkPaySystem(paySystem.value);
+        this.checkedPaySystem(paySystem.value);
       }
       else {
         this.showMessage('Payment system not found', 'invalid');
