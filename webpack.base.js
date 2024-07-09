@@ -4,10 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
-  output: {
-    path: path.join(__dirname, 'dist'),
-    assetModuleFilename: path.join('images', '[name][ext]'),
-  },
+  output: { path: path.join(__dirname, 'dist'), assetModuleFilename: 'images/[name][ext]' },
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } },
@@ -17,11 +14,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ filename: 'index.html', template: path.join(__dirname, 'src', 'index.html') }),
+    new HtmlWebpackPlugin({ filename: 'index.html', template: path.join(__dirname, 'src/index.html') }),
     new FileManagerPlugin({
       events: {
         onStart: { delete: ['dist'] },
-        onEnd: { copy: [{ source: path.join('src', 'static'), destination: 'dist' }] },
+        onEnd: { copy: [{ source: 'src/static', destination: 'dist' }] },
       },
     }),
     new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
