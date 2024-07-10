@@ -1,6 +1,6 @@
 const webpack = require('webpack'); // Импортируем Webpack для компиляции
 const WebpackDevServer = require('webpack-dev-server'); // Импортируем Webpack Dev Server для создания и управления сервером разработки
-const config = require('../../../webpack.dev.js'); // Загружаем файл конфигурации Webpack
+const config = require('../../../webpack.dev'); // Загружаем файл конфигурации Webpack
 
 const options = config.devServer || {}; // Получаем опции для Dev Server из конфигурации Webpack
 const compiler = webpack(config); // Создаём компилятор Webpack с загруженной конфигурацией
