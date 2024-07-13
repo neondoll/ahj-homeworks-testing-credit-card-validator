@@ -3,30 +3,32 @@ const puppeteer = require('puppeteer'); // Подключаем библиоте
 // Описываем группу тестов для e2e тестирования валидатора кредитных карт
 describe('Credit Card Validator E2E Tests', () => {
   let browser;
-  let page;
+  // let page;
+  const baseUrl = 'http://localhost:9000';
 
   // Функция, которая выполняется перед всеми тестами
-  beforeEach(async () => {
+  beforeAll(async () => {
     // Запускаем браузер
     browser = await puppeteer.launch({
       headless: false, // Установите true, если не нужен видимый браузер (безголовый режим)
       slowMo: 50, // Замедляем выполнение на 50ms чтобы видеть взаимодействие
+      // devtools: true,
     });
-
-    // Открываем новую страницу в браузере
-    page = await browser.newPage();
-
-    // Переходим на локальный сервер (убедитесь, что сервер запущен на порту 9000)
-    await page.goto('http://localhost:9000');
   });
   // Функция, которая выполняется после всех тестов
-  afterEach(async () => {
+  afterAll(async () => {
     // Закрываем браузер
     await browser.close();
   });
 
   // Тестируем валидацию корректного номера карты
   test('Valid card number validation', async () => {
+    // Открываем новую страницу в браузере
+    const page = await browser.newPage();
+
+    // Переходим на локальный сервер (убедитесь, что сервер запущен на порту 9000)
+    await page.goto(baseUrl);
+
     // Вводим корректный номер карты в инпут
     await page.type('.card-validator-widget__input', '5586200023405365');
 
@@ -45,6 +47,12 @@ describe('Credit Card Validator E2E Tests', () => {
 
   // Тестируем валидацию некорректного номера карты
   test('Invalid card number validation', async () => {
+    // Открываем новую страницу в браузере
+    const page = await browser.newPage();
+
+    // Переходим на локальный сервер (убедитесь, что сервер запущен на порту 9000)
+    await page.goto(baseUrl);
+
     // Вводим некорректный номер карты в инпут
     await page.type('.card-validator-widget__input', '5586200023405366');
 
