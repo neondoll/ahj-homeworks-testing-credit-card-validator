@@ -6,7 +6,7 @@ describe('Credit Card Validator E2E Tests', () => {
   let page;
 
   // Функция, которая выполняется перед всеми тестами
-  beforeAll(async () => {
+  beforeEach(async () => {
     // Запускаем браузер
     browser = await puppeteer.launch({
       headless: false, // Установите true, если не нужен видимый браузер (безголовый режим)
@@ -20,7 +20,7 @@ describe('Credit Card Validator E2E Tests', () => {
     await page.goto('http://localhost:9000');
   });
   // Функция, которая выполняется после всех тестов
-  afterAll(async () => {
+  afterEach(async () => {
     // Закрываем браузер
     await browser.close();
   });

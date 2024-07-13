@@ -20,9 +20,9 @@ Terminal: ```npm run test```
 
 ### E2E тестирование
 
-Terminal 1: ```node e2e.server.js```
+Terminal 1: ```npm run e2e:server```
 
-Terminal 2: ```npm run e2e```
+Terminal 2: ```npm run e2e:test```
 
 ## Используемые материалы
 

@@ -1,6 +1,6 @@
 const webpack = require('webpack'); // Подключаем webpack для компиляции проекта
 const WebpackDevServer = require('webpack-dev-server'); // Подключаем WebpackDevServer для создания и настройки дев-сервера
-const config = require('./webpack.dev'); // Импортируем конфигурацию webpack для режима разработки
+const config = require('../../../webpack.dev'); // Импортируем конфигурацию webpack для режима разработки
 
 // Настройки для дев-сервера
 const options = {
